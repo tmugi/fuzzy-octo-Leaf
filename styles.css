@@ -324,6 +324,17 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 .btn-sec:hover { color: var(--chloro); }
 .btn-sec::after { content: '↗'; font-size: 11px; transition: transform 240ms; }
 .btn-sec:hover::after { transform: translate(2px,-2px); }
+.btn-soon {
+  color: var(--text-3);
+  opacity: 0.85;
+  cursor: default;
+}
+.btn-soon::after { content: ''; display: none; }
+
+#cta,
+#cta-form {
+  scroll-margin-top: 84px;
+}
 
 /* FIX: Scroll cue */
 .scroll-cue {
