@@ -34,7 +34,7 @@
 <!-- =============================================
    NAV — links anchor to real page sections
    ============================================= -->
-<nav>
+<nav class="site-nav" aria-label="Primary">
   <a class="nav-logo" href="#hero">
     <img src="./assets/logo.jpg" alt="Philtrum logo" style="height:36px;width:auto;border-radius:6px;display:block">
     <span class="nav-sub" style="margin-left:2px">Continuous Sensing</span>
@@ -46,8 +46,23 @@
     <li><a href="#privacy"  data-section="privacy">privacy</a></li>
     <li><a href="#platform" data-section="platform">platform</a></li>
   </ul>
-  <a href="#cta" class="nav-cta">Early Access</a>
+  <a href="#cta-form" class="nav-cta">Early Access</a>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+    <span class="nav-toggle-line"></span>
+    <span class="nav-toggle-line"></span>
+    <span class="nav-toggle-line"></span>
+  </button>
 </nav>
+<div class="mobile-nav" id="mobile-menu" hidden>
+  <ul class="mobile-links">
+    <li><a href="#signals" data-section="signals">signals</a></li>
+    <li><a href="#response" data-section="response">response</a></li>
+    <li><a href="#comfort" data-section="comfort">comfort</a></li>
+    <li><a href="#privacy" data-section="privacy">privacy</a></li>
+    <li><a href="#platform" data-section="platform">platform</a></li>
+  </ul>
+  <a href="#cta-form" class="mobile-cta">Early Access</a>
+</div>
 
 
 <!-- =============================================
@@ -376,38 +391,60 @@
       <p class="t-kicker" style="margin-bottom:14px">Early Access</p>
       <h2 class="t-dis cta-hed">Join the<br><em>pilot cohort.</em></h2>
       <p class="cta-sub">We're selecting researchers, clinicians, and product teams for our first structured pilot. Cohort size is limited—applications reviewed in the order received.</p>
-      <form id="cta-form" class="cta-form" action="https://formsubmit.co/info@philtrum.io" method="POST">
+      <form id="cta-form" class="cta-form" action="https://formsubmit.co/info@philtrum.io" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Philtrum Early Access Submission">
         <input type="hidden" name="_next" value="https://tmugi.github.io/fuzzy-octo-Leaf/?submitted=true#cta">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off">
 
-        <div class="cta-form-grid">
-          <label class="form-field" for="ea-name">
-            <span>Full Name</span>
-            <input id="ea-name" name="full_name" type="text" autocomplete="name" required>
-          </label>
-
-          <label class="form-field" for="ea-email">
-            <span>Work Email</span>
-            <input id="ea-email" name="work_email" type="email" autocomplete="email" required>
-          </label>
-
-          <label class="form-field form-field-full" for="ea-org">
-            <span>Organization</span>
-            <input id="ea-org" name="organization" type="text" autocomplete="organization" required>
-          </label>
-
-          <label class="form-field form-field-full" for="ea-notes">
-            <span>Notes (Optional)</span>
-            <textarea id="ea-notes" name="notes" rows="3" placeholder="Pilot goals, use case, or timeline"></textarea>
-          </label>
+        <div class="form-stepper" aria-hidden="true">
+          <span class="step-dot is-active" data-step-dot="1">1</span>
+          <span class="step-line"></span>
+          <span class="step-dot" data-step-dot="2">2</span>
         </div>
 
-        <div class="cta-form-actions">
-          <button type="submit" class="btn-pri">Request Access</button>
-          <a href="mailto:info@philtrum.io?subject=Philtrum%20Technical%20Brief%20Request" class="btn-sec">Download Brief</a>
+        <div class="form-step" data-step="1">
+          <div class="cta-form-grid">
+            <label class="form-field" for="ea-name">
+              <span>Full Name</span>
+              <input id="ea-name" name="full_name" type="text" autocomplete="name" required>
+              <span class="field-error" id="ea-name-error" hidden>Please enter your full name.</span>
+            </label>
+
+            <label class="form-field" for="ea-email">
+              <span>Work Email</span>
+              <input id="ea-email" name="work_email" type="email" autocomplete="email" required>
+              <span class="field-error" id="ea-email-error" hidden>Please enter a valid work email.</span>
+            </label>
+          </div>
+
+          <p class="form-inline-error" id="form-inline-error" hidden>Please fix the highlighted fields before continuing.</p>
+
+          <div class="cta-form-actions">
+            <button type="button" class="btn-pri" id="form-next">Continue</button>
+            <a href="mailto:info@philtrum.io?subject=Philtrum%20Technical%20Brief%20Request" class="btn-sec">Download Brief</a>
+          </div>
+        </div>
+
+        <div class="form-step" data-step="2" hidden>
+          <div class="cta-form-grid">
+            <label class="form-field form-field-full" for="ea-org">
+              <span>Organization</span>
+              <input id="ea-org" name="organization" type="text" autocomplete="organization" required>
+              <span class="field-error" id="ea-org-error" hidden>Please enter your organization.</span>
+            </label>
+
+            <label class="form-field form-field-full" for="ea-notes">
+              <span>Notes (Optional)</span>
+              <textarea id="ea-notes" name="notes" rows="3" placeholder="Pilot goals, use case, or timeline"></textarea>
+            </label>
+          </div>
+
+          <div class="cta-form-actions">
+            <button type="button" class="form-back" id="form-back">Back</button>
+            <button type="submit" class="btn-pri" id="form-submit">Request Access</button>
+          </div>
         </div>
       </form>
       <p class="form-status" id="form-status" hidden>Thanks, your submission was received. We will follow up soon.</p>

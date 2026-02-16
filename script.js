@@ -201,10 +201,10 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 });
 
 /* =====================================================
-   5. NAV ACTIVE STATE — highlight current section
+   5. NAV STATE — active links + mobile menu
    ===================================================== */
 const sections = ['signals','response','comfort','privacy','platform','cta'];
-const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+const navLinks = document.querySelectorAll('.nav-links a[data-section], .mobile-links a[data-section]');
 
 const sectionIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -223,9 +223,140 @@ sections.forEach(id => {
 });
 
 /* =====================================================
-   6. CTA FORM SUCCESS MESSAGE
+   6. MOBILE NAV TOGGLE
    ===================================================== */
+const navToggle = document.getElementById('nav-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (navToggle && mobileMenu) {
+  const setMenuOpen = (open) => {
+    navToggle.setAttribute('aria-expanded', String(open));
+    mobileMenu.hidden = !open;
+    document.body.classList.toggle('nav-open', open);
+  };
+
+  navToggle.addEventListener('click', () => {
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    setMenuOpen(!expanded);
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 860) setMenuOpen(false);
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenuOpen(false);
+  });
+}
+
+/* =====================================================
+   7. CTA FORM — steps + validation + success state
+   ===================================================== */
+const ctaForm = document.getElementById('cta-form');
 const formStatus = document.getElementById('form-status');
+
+if (ctaForm) {
+  const step1 = ctaForm.querySelector('[data-step="1"]');
+  const step2 = ctaForm.querySelector('[data-step="2"]');
+  const stepDots = ctaForm.querySelectorAll('[data-step-dot]');
+  const nextBtn = document.getElementById('form-next');
+  const backBtn = document.getElementById('form-back');
+  const submitBtn = document.getElementById('form-submit');
+  const inlineError = document.getElementById('form-inline-error');
+
+  const nameInput = document.getElementById('ea-name');
+  const emailInput = document.getElementById('ea-email');
+  const orgInput = document.getElementById('ea-org');
+
+  const fieldConfigs = [
+    { input: nameInput, message: 'Please enter your full name.' },
+    { input: emailInput, message: 'Please enter a valid work email.' },
+    { input: orgInput, message: 'Please enter your organization.' }
+  ];
+
+  const setStep = (step) => {
+    if (!step1 || !step2) return;
+    const isStepOne = step === 1;
+    step1.hidden = !isStepOne;
+    step2.hidden = isStepOne;
+    stepDots.forEach(dot => {
+      dot.classList.toggle('is-active', Number(dot.dataset.stepDot) === step);
+    });
+    if (inlineError) inlineError.hidden = true;
+  };
+
+  const validateField = (cfg) => {
+    if (!cfg || !cfg.input) return true;
+    const { input, message } = cfg;
+    const errorEl = document.getElementById(`${input.id}-error`);
+    let valid = input.checkValidity();
+
+    if (!valid && input.type === 'email' && input.validity.typeMismatch && input.value.trim() !== '') {
+      if (errorEl) errorEl.textContent = 'Please enter a valid email address.';
+    } else if (!valid && errorEl) {
+      errorEl.textContent = message;
+    }
+
+    input.setAttribute('aria-invalid', String(!valid));
+    if (errorEl) errorEl.hidden = valid;
+    return valid;
+  };
+
+  fieldConfigs.forEach(cfg => {
+    if (!cfg.input) return;
+    cfg.input.addEventListener('blur', () => validateField(cfg));
+    cfg.input.addEventListener('input', () => {
+      if (cfg.input.getAttribute('aria-invalid') === 'true') validateField(cfg);
+    });
+  });
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const stepOneValid = [fieldConfigs[0], fieldConfigs[1]].every(validateField);
+      if (!stepOneValid) {
+        if (inlineError) inlineError.hidden = false;
+        const firstInvalid = [nameInput, emailInput].find(i => i && i.getAttribute('aria-invalid') === 'true');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+      setStep(2);
+      if (orgInput) orgInput.focus();
+    });
+  }
+
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      setStep(1);
+      if (emailInput) emailInput.focus();
+    });
+  }
+
+  ctaForm.addEventListener('submit', (e) => {
+    const formValid = fieldConfigs.every(validateField);
+    if (!formValid) {
+      e.preventDefault();
+      const orgInvalid = orgInput && orgInput.getAttribute('aria-invalid') === 'true';
+      setStep(orgInvalid ? 2 : 1);
+      if (inlineError && !orgInvalid) inlineError.hidden = false;
+      const firstInvalid = [nameInput, emailInput, orgInput].find(i => i && i.getAttribute('aria-invalid') === 'true');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('is-loading');
+      submitBtn.textContent = 'Submitting...';
+    }
+  });
+
+  setStep(1);
+}
+
 if (formStatus) {
   const params = new URLSearchParams(window.location.search);
   if (params.get('submitted') === 'true') {

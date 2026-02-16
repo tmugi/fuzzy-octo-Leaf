@@ -134,7 +134,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 /* =================================================
    NAV — FIX: -webkit-backdrop-filter for Firefox
    ================================================= */
-nav {
+.site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: 60px; display: flex; align-items: center;
   padding: 0 48px; justify-content: space-between;
@@ -172,6 +172,72 @@ nav {
   transition: all 300ms var(--ease);
 }
 .nav-cta:hover { background: var(--chloro); color: #fff; box-shadow: 0 4px 20px rgba(38,107,67,0.18); }
+.nav-toggle {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.45);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+.nav-toggle-line {
+  width: 16px;
+  height: 1.5px;
+  background: var(--text-2);
+  transition: transform 220ms var(--ease), opacity 220ms var(--ease);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.mobile-nav {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-bottom: 1px solid var(--stroke-s);
+  background: rgba(241,240,236,0.96);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  padding: 14px 20px 20px;
+}
+.mobile-nav[hidden] { display: none !important; }
+.mobile-links {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.mobile-links a {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: var(--text-2);
+  padding: 8px 2px;
+  border-bottom: 1px solid var(--stroke-s);
+}
+.mobile-links a.active,
+.mobile-links a:hover { color: var(--chloro); }
+.mobile-cta {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--chloro);
+  border: 1px solid var(--stroke-c);
+  padding: 8px 16px 9px 18px;
+  border-radius: var(--r-leaf);
+}
 
 /* =================================================
    HERO
@@ -429,6 +495,35 @@ nav {
 .cta-sub  { font-size: 17px; color: var(--text-2); font-weight: 300; margin-bottom: 34px; line-height: 1.65; }
 
 .cta-form { max-width: 560px; }
+.form-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.step-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--stroke);
+  color: var(--text-3);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-dot.is-active {
+  border-color: var(--stroke-c);
+  color: var(--chloro);
+  background: rgba(38,107,67,0.08);
+}
+.step-line {
+  width: 26px;
+  height: 1px;
+  background: var(--stroke);
+}
+.form-step[hidden] { display: none; }
 .cta-form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -470,6 +565,16 @@ nav {
   min-height: 90px;
 }
 .form-field-full { grid-column: 1 / -1; }
+.field-error {
+  font-size: 12px;
+  line-height: 1.3;
+  color: #9b2e2e;
+}
+.form-field input[aria-invalid="true"],
+.form-field textarea[aria-invalid="true"] {
+  border-color: rgba(155,46,46,0.5);
+  box-shadow: 0 0 0 2px rgba(155,46,46,0.08);
+}
 .hp-field {
   position: absolute;
   left: -9999px;
@@ -487,11 +592,36 @@ nav {
   border: 0;
   cursor: pointer;
 }
+.form-back {
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.form-back:hover { color: var(--chloro); }
+.btn-pri.is-loading {
+  opacity: 0.78;
+  cursor: wait;
+}
+.form-inline-error {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #9b2e2e;
+}
 .form-status {
   margin-top: 14px;
   font-size: 14px;
   line-height: 1.5;
   color: var(--chloro);
+  border: 1px solid var(--stroke-c);
+  background: rgba(38,107,67,0.07);
+  border-radius: 8px;
+  padding: 10px 12px;
 }
 
 .faq-label {
@@ -591,8 +721,11 @@ footer {
    RESPONSIVE
    ================================================= */
 @media (max-width: 860px) {
-  nav { padding: 0 20px; }
+  body.nav-open { overflow: hidden; }
+  .site-nav { padding: 0 20px; }
   .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-toggle { display: inline-flex; }
   #hero { padding: 96px 24px 80px; }
   .hero-membrane { display: none; }
   .scroll-cue { display: none; }
