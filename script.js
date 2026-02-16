@@ -71,7 +71,7 @@ if (reduceMotion) {
 }
 
 /* =====================================================
-   3. LOOP DIAGRAM — connector draw + signal pulse
+   3. LOOP DIAGRAM - connector draw + signal pulse
    Cross-browser: getPointAtLength() for dot animation
    ===================================================== */
 const path1 = document.getElementById('path-1-2');
@@ -201,7 +201,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 });
 
 /* =====================================================
-   5. NAV STATE — active links + mobile menu
+   5. NAV STATE - active links + mobile menu
    ===================================================== */
 const sections = ['signals','response','comfort','privacy','platform','cta'];
 const navLinks = document.querySelectorAll('.nav-links a[data-section], .mobile-links a[data-section]');
@@ -281,7 +281,7 @@ if (navToggle && mobileMenu) {
 }
 
 /* =====================================================
-   8. CTA FORM — steps + validation + success state
+   8. CTA FORM - steps + validation + success state
    ===================================================== */
 const ctaForm = document.getElementById('cta-form');
 const formStatus = document.getElementById('form-status');

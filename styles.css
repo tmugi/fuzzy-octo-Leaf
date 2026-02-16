@@ -1,5 +1,5 @@
 /* =================================================
-   LEAF — v3   All critique items addressed
+   LEAF - v3   All critique items addressed
    ================================================= */
 :root {
   --base:     #F1F0EC;
@@ -99,7 +99,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 .vt { stroke: rgba(25,102,102,0.13); }
 .drawn { stroke-dashoffset: 0 !important; }
 
-/* Membrane wash — light */
+/* Membrane wash - light */
 .mem { position: relative; overflow: hidden; }
 .mem-f1, .mem-f2 {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
@@ -132,7 +132,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 }
 
 /* =================================================
-   NAV — FIX: -webkit-backdrop-filter for Firefox
+   NAV - FIX: -webkit-backdrop-filter for Firefox
    ================================================= */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -391,16 +391,16 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 @keyframes hm-core{ 0%,100%{opacity:.15;transform:scale(1)} 50%{opacity:.32;transform:scale(1.18)} }
 
 /* =================================================
-   SECTION VEIN DIVIDERS — FIX: no preserveAspectRatio
+   SECTION VEIN DIVIDERS - FIX: no preserveAspectRatio
    ================================================= */
 .vdiv {
   width: 100%; height: 52px; display: block;
   overflow: visible; padding: 0 80px;
-  /* FIX: remove preserveAspectRatio="none" — set on SVG element */
+  /* FIX: remove preserveAspectRatio="none" - set on SVG element */
 }
 
 /* =================================================
-   TILES — #signals
+   TILES - #signals
    ================================================= */
 #signals { background: var(--base-2); }
 #signals .section-anchor {
@@ -432,7 +432,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 .tile-desc { font-size: 15px; line-height: 1.65; color: var(--text-2); font-weight: 300; }
 
 /* =================================================
-   LOOP DIAGRAM — #response  MAJOR REBUILD
+   LOOP DIAGRAM - #response  MAJOR REBUILD
    ================================================= */
 #response {
   padding: 96px 80px; position: relative; z-index: 1;
@@ -459,7 +459,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 @keyframes node-breathe-b { 0%,100%{r:38;opacity:.4} 50%{r:41;opacity:.65} }
 @keyframes respond-pulse   { 0%,100%{opacity:0;r:68} 50%{opacity:.3;r:80} }
 
-/* Signal pulse glow on Respond node — triggered by JS class */
+/* Signal pulse glow on Respond node - triggered by JS class */
 .respond-glow {
   fill: rgba(38,107,67,0.0);
   transition: fill 400ms var(--ease);
@@ -467,7 +467,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 .respond-glow.active { fill: rgba(38,107,67,0.1); }
 
 /* =================================================
-   USE CASES — #comfort
+   USE CASES - #comfort
    ================================================= */
 #comfort { background: var(--base-2); padding: 96px 80px; }
 .uc-inner { max-width: 1200px; margin: 0 auto; }
@@ -525,9 +525,17 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
   white-space: nowrap; transition: all 240ms var(--ease);
 }
 .chip:hover { background: rgba(38,107,67,0.1); border-color: rgba(38,107,67,0.4); }
+.platform-note {
+  margin-top: 16px;
+  max-width: 72ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+  font-weight: 300;
+}
 
 /* =================================================
-   DIFFERENTIATOR — #privacy  FIX: static chips only
+   DIFFERENTIATOR - #privacy  FIX: static chips only
    ================================================= */
 #privacy { padding: 72px 80px 60px; }
 .diff-hed { margin-bottom: 32px; }
@@ -543,7 +551,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
 .d-chip:hover { border-color: var(--stroke-c); color: var(--chloro); background: rgba(38,107,67,0.05); }
 
 /* =================================================
-   CTA + FAQ — #cta
+   CTA + FAQ - #cta
    FIX: grid-template-rows accordion (no max-height hack)
    ================================================= */
 #cta { background: var(--base-2); padding: 96px 80px; }
@@ -729,7 +737,7 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
   transform: rotate(45deg);
 }
 
-/* FIX: grid-template-rows transition — smooth regardless of content height */
+/* FIX: grid-template-rows transition - smooth regardless of content height */
 .faq-a {
   display: grid;
   grid-template-rows: 0fr;
