@@ -223,7 +223,34 @@ sections.forEach(id => {
 });
 
 /* =====================================================
-   6. MOBILE NAV TOGGLE
+   6. NAV SCROLL PROGRESS
+   ===================================================== */
+const scrollProgressBar = document.getElementById('scroll-progress-bar');
+
+if (scrollProgressBar) {
+  let progressTicking = false;
+  const updateScrollProgress = () => {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop;
+    const scrollRange = doc.scrollHeight - window.innerHeight;
+    const progress = scrollRange > 0 ? Math.min(1, scrollTop / scrollRange) : 0;
+    scrollProgressBar.style.transform = `scaleX(${progress.toFixed(4)})`;
+    progressTicking = false;
+  };
+
+  const queueScrollProgress = () => {
+    if (progressTicking) return;
+    progressTicking = true;
+    requestAnimationFrame(updateScrollProgress);
+  };
+
+  window.addEventListener('scroll', queueScrollProgress, { passive: true });
+  window.addEventListener('resize', queueScrollProgress);
+  queueScrollProgress();
+}
+
+/* =====================================================
+   7. MOBILE NAV TOGGLE
    ===================================================== */
 const navToggle = document.getElementById('nav-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -254,7 +281,7 @@ if (navToggle && mobileMenu) {
 }
 
 /* =====================================================
-   7. CTA FORM — steps + validation + success state
+   8. CTA FORM — steps + validation + success state
    ===================================================== */
 const ctaForm = document.getElementById('cta-form');
 const formStatus = document.getElementById('form-status');
