@@ -88,7 +88,7 @@
 
   <!-- FIX: Secondary path added -->
   <div class="hero-actions rev d2">
-    <a href="#cta" class="btn-pri">Request Early Access</a>
+    <a href="#cta-form" class="btn-pri">Request Early Access</a>
     <a href="mailto:info@philtrum.io?subject=Philtrum%20Technical%20Brief%20Request" class="btn-sec">Technical Brief</a>
   </div>
 
@@ -376,10 +376,41 @@
       <p class="t-kicker" style="margin-bottom:14px">Early Access</p>
       <h2 class="t-dis cta-hed">Join the<br><em>pilot cohort.</em></h2>
       <p class="cta-sub">We're selecting researchers, clinicians, and product teams for our first structured pilot. Cohort size is limited—applications reviewed in the order received.</p>
-      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
-        <a href="mailto:info@philtrum.io?subject=Philtrum%20Early%20Access%20Request" class="btn-pri">Request Access</a>
-        <a href="mailto:info@philtrum.io?subject=Philtrum%20Technical%20Brief%20Request" class="btn-sec">Download Brief</a>
-      </div>
+      <form id="cta-form" class="cta-form" action="https://formsubmit.co/info@philtrum.io" method="POST">
+        <input type="hidden" name="_subject" value="Philtrum Early Access Submission">
+        <input type="hidden" name="_next" value="https://tmugi.github.io/fuzzy-octo-Leaf/?submitted=true#cta">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off">
+
+        <div class="cta-form-grid">
+          <label class="form-field" for="ea-name">
+            <span>Full Name</span>
+            <input id="ea-name" name="full_name" type="text" autocomplete="name" required>
+          </label>
+
+          <label class="form-field" for="ea-email">
+            <span>Work Email</span>
+            <input id="ea-email" name="work_email" type="email" autocomplete="email" required>
+          </label>
+
+          <label class="form-field form-field-full" for="ea-org">
+            <span>Organization</span>
+            <input id="ea-org" name="organization" type="text" autocomplete="organization" required>
+          </label>
+
+          <label class="form-field form-field-full" for="ea-notes">
+            <span>Notes (Optional)</span>
+            <textarea id="ea-notes" name="notes" rows="3" placeholder="Pilot goals, use case, or timeline"></textarea>
+          </label>
+        </div>
+
+        <div class="cta-form-actions">
+          <button type="submit" class="btn-pri">Request Access</button>
+          <a href="mailto:info@philtrum.io?subject=Philtrum%20Technical%20Brief%20Request" class="btn-sec">Download Brief</a>
+        </div>
+      </form>
+      <p class="form-status" id="form-status" hidden>Thanks, your submission was received. We will follow up soon.</p>
     </div>
 
     <div class="rev d1">

@@ -221,3 +221,18 @@ sections.forEach(id => {
   const section = document.getElementById(id);
   if (section) sectionIO.observe(section);
 });
+
+/* =====================================================
+   6. CTA FORM SUCCESS MESSAGE
+   ===================================================== */
+const formStatus = document.getElementById('form-status');
+if (formStatus) {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('submitted') === 'true') {
+    formStatus.hidden = false;
+    if (window.history && window.history.replaceState) {
+      const cleanUrl = `${window.location.pathname}${window.location.hash}`;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+  }
+}
