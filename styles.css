@@ -35,6 +35,39 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--chloro);
+  outline-offset: 3px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 14px;
+  top: 10px;
+  z-index: 1000;
+  background: var(--chloro);
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 12px;
+  border-radius: 6px;
+  transform: translateY(-150%);
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 /* Typography */
 .t-kicker {
   font-family: var(--f-mono);
@@ -473,6 +506,20 @@ footer {
 .d1 { transition-delay: 80ms; }
 .d2 { transition-delay: 180ms; }
 .d3 { transition-delay: 280ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .rev {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .scroll-cue { display: none; }
+}
 
 /* =================================================
    RESPONSIVE
