@@ -358,6 +358,42 @@ h2.t-dis { font-size: clamp(28px, 3.8vw, 50px); }
   writing-mode: vertical-lr; transform: rotate(180deg);
 }
 
+/* =================================================
+   ABOUT BRIEF - #about-brief
+   ================================================= */
+#about-brief {
+  border-top: 1px solid var(--stroke-s);
+  border-bottom: 1px solid var(--stroke-s);
+  padding: 22px 80px 24px;
+  background: linear-gradient(
+    90deg,
+    rgba(38,107,67,0.018) 0%,
+    rgba(25,102,102,0.014) 100%
+  );
+}
+.about-brief-inner {
+  max-width: 900px;
+}
+.about-brief-inner .t-kicker {
+  margin-bottom: 10px;
+}
+.about-brief-lead {
+  font-family: var(--f-dis);
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  max-width: 34ch;
+}
+.about-brief-sub {
+  margin-top: 10px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+  font-weight: 300;
+  max-width: 68ch;
+}
+
 /* Hero membrane visual */
 .hero-membrane {
   position: absolute; bottom: -20px; right: -20px;
@@ -829,6 +865,10 @@ footer {
   .hero-sub { font-size: 16px; line-height: 1.58; max-width: 34ch; }
   .hero-membrane { display: none; }
   .scroll-cue { display: none; }
+  #about-brief { padding: 18px 24px 20px; }
+  .about-brief-inner .t-kicker { margin-bottom: 8px; }
+  .about-brief-lead { font-size: clamp(19px, 5.6vw, 26px); line-height: 1.28; }
+  .about-brief-sub { margin-top: 8px; font-size: 14px; line-height: 1.58; }
   .vdiv { padding: 0 24px; }
   #signals .section-anchor {
     padding: 44px 24px 14px;
@@ -863,5 +903,6 @@ footer {
   h1.t-dis { font-size: clamp(30px, 10vw, 44px); }
   h2.t-dis { font-size: clamp(24px, 8vw, 34px); }
   .hero-sub { font-size: 15px; }
+  .about-brief-sub { font-size: 13.8px; }
   .section-title-sm { font-size: clamp(20px, 7.5vw, 26px); }
 }
