@@ -1,7 +1,9 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const membraneSections = document.querySelectorAll('.mem');
 
 if (reduceMotion) {
   document.querySelectorAll('.rev').forEach((el) => el.classList.add('vis'));
+  membraneSections.forEach((section) => section.classList.add('in-view'));
 } else {
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -13,6 +15,14 @@ if (reduceMotion) {
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
   document.querySelectorAll('.rev').forEach((el) => revealObserver.observe(el));
+
+  const memObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('in-view', entry.isIntersecting);
+    });
+  }, { threshold: 0.15, rootMargin: '-10% 0px -10% 0px' });
+
+  membraneSections.forEach((section) => memObserver.observe(section));
 }
 
 const sectionIds = ['who', 'mission', 'principles', 'roadmap'];

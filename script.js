@@ -3,8 +3,11 @@
    ===================================================== */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const membraneSections = document.querySelectorAll('.mem');
+
 if (reduceMotion) {
   document.querySelectorAll('.rev').forEach(el => el.classList.add('vis'));
+  membraneSections.forEach((section) => section.classList.add('in-view'));
 } else {
   const revIO = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -24,6 +27,13 @@ if (reduceMotion) {
       }
     });
   });
+
+  const memIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('in-view', entry.isIntersecting);
+    });
+  }, { threshold: 0.15, rootMargin: '-10% 0px -10% 0px' });
+  membraneSections.forEach((section) => memIO.observe(section));
 }
 
 /* =====================================================
@@ -81,6 +91,7 @@ const n3Pulse = document.getElementById('n3-pulse');
 const n3Core  = document.getElementById('n3-core');
 const n1m1    = document.getElementById('n1-m1');
 const n1m3    = document.getElementById('n1-m3');
+const loopOuter = document.querySelector('.loop-outer');
 
 // Node 1 membrane breathing (CSS-equivalent via JS requestAnimationFrame)
 function breatheNode1(t) {
@@ -171,6 +182,7 @@ if (reduceMotion) {
         // Start pulse after paths drawn
         setTimeout(() => {
           loopActive = true;
+          if (loopOuter) loopOuter.classList.add('loop-live');
           requestAnimationFrame(animLoop);
         }, 1200);
         loopTriggerIO.unobserve(e.target);
@@ -281,7 +293,32 @@ if (navToggle && mobileMenu) {
 }
 
 /* =====================================================
-   8. CTA FORM - steps + validation + success state
+   8. CTA LINK SCROLL
+   ===================================================== */
+const ctaSection = document.getElementById('cta');
+const ctaLinks = document.querySelectorAll('a[href="#cta"]');
+
+if (ctaSection && ctaLinks.length > 0) {
+  ctaLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      ctaSection.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
+      if (window.history && window.history.replaceState) {
+        const targetUrl = `${window.location.pathname}${window.location.search}#cta`;
+        window.history.replaceState({}, document.title, targetUrl);
+      } else {
+        window.location.hash = 'cta';
+      }
+    });
+  });
+}
+
+/* =====================================================
+   9. CTA FORM - steps + validation + success state
    ===================================================== */
 const ctaForm = document.getElementById('cta-form');
 const formStatus = document.getElementById('form-status');
@@ -310,8 +347,27 @@ if (ctaForm) {
   const setStep = (step) => {
     if (!step1 || !step2) return;
     const isStepOne = step === 1;
-    step1.hidden = !isStepOne;
-    step2.hidden = isStepOne;
+    const activeStep = isStepOne ? step1 : step2;
+    const inactiveStep = isStepOne ? step2 : step1;
+
+    window.clearTimeout(activeStep._hideTimer);
+    window.clearTimeout(inactiveStep._hideTimer);
+
+    activeStep.hidden = false;
+    inactiveStep.hidden = false;
+    activeStep.classList.add('is-active');
+    inactiveStep.classList.remove('is-active');
+    activeStep.setAttribute('aria-hidden', 'false');
+    inactiveStep.setAttribute('aria-hidden', 'true');
+
+    if (reduceMotion) {
+      inactiveStep.hidden = true;
+    } else {
+      inactiveStep._hideTimer = window.setTimeout(() => {
+        if (!inactiveStep.classList.contains('is-active')) inactiveStep.hidden = true;
+      }, 300);
+    }
+
     stepDots.forEach(dot => {
       dot.classList.toggle('is-active', Number(dot.dataset.stepDot) === step);
     });
