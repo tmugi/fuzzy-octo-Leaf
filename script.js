@@ -297,11 +297,13 @@ if (ctaForm) {
 
   const nameInput = document.getElementById('ea-name');
   const emailInput = document.getElementById('ea-email');
+  const requestTypeInput = document.getElementById('ea-request-type');
   const orgInput = document.getElementById('ea-org');
 
   const fieldConfigs = [
     { input: nameInput, message: 'Please enter your full name.' },
     { input: emailInput, message: 'Please enter a valid work email.' },
+    { input: requestTypeInput, message: 'Please choose a request type.' },
     { input: orgInput, message: 'Please enter your organization.' }
   ];
 
@@ -336,6 +338,7 @@ if (ctaForm) {
   fieldConfigs.forEach(cfg => {
     if (!cfg.input) return;
     cfg.input.addEventListener('blur', () => validateField(cfg));
+    cfg.input.addEventListener('change', () => validateField(cfg));
     cfg.input.addEventListener('input', () => {
       if (cfg.input.getAttribute('aria-invalid') === 'true') validateField(cfg);
     });
@@ -351,7 +354,11 @@ if (ctaForm) {
         return;
       }
       setStep(2);
-      if (orgInput) orgInput.focus();
+      if (requestTypeInput) {
+        requestTypeInput.focus();
+      } else if (orgInput) {
+        orgInput.focus();
+      }
     });
   }
 
@@ -366,10 +373,10 @@ if (ctaForm) {
     const formValid = fieldConfigs.every(validateField);
     if (!formValid) {
       e.preventDefault();
-      const orgInvalid = orgInput && orgInput.getAttribute('aria-invalid') === 'true';
-      setStep(orgInvalid ? 2 : 1);
-      if (inlineError && !orgInvalid) inlineError.hidden = false;
-      const firstInvalid = [nameInput, emailInput, orgInput].find(i => i && i.getAttribute('aria-invalid') === 'true');
+      const stepOneInvalid = [nameInput, emailInput].some(i => i && i.getAttribute('aria-invalid') === 'true');
+      setStep(stepOneInvalid ? 1 : 2);
+      if (inlineError && stepOneInvalid) inlineError.hidden = false;
+      const firstInvalid = [nameInput, emailInput, requestTypeInput, orgInput].find(i => i && i.getAttribute('aria-invalid') === 'true');
       if (firstInvalid) firstInvalid.focus();
       return;
     }
