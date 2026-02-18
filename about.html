@@ -6,25 +6,37 @@
 <title>About Philtrum - Who We Are and Mission</title>
 <meta name="description" content="Learn who Philtrum is, what we are building, and the mission guiding LEAF: continuous sensing that links environment and physiology.">
 <meta name="theme-color" content="#F1F0EC">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'sha256-kNYz7IobH/3Rg6tx7PHMlOlE7mVLJ9vxujTI1jX7n+Y='; connect-src 'self'; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://tmugi.github.io/fuzzy-octo-Leaf/about.html">
+<link rel="canonical" href="https://www.philtrum.io/about.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="About Philtrum - Who We Are and Mission">
 <meta property="og:description" content="A dedicated overview of Philtrum's mission, principles, and roadmap.">
-<meta property="og:url" content="https://tmugi.github.io/fuzzy-octo-Leaf/about.html">
-<meta property="og:image" content="https://tmugi.github.io/fuzzy-octo-Leaf/assets/logo.png">
+<meta property="og:url" content="https://www.philtrum.io/about.html">
+<meta property="og:image" content="https://www.philtrum.io/assets/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="About Philtrum - Who We Are and Mission">
 <meta name="twitter:description" content="A dedicated overview of Philtrum's mission, principles, and roadmap.">
-<meta name="twitter:image" content="https://tmugi.github.io/fuzzy-octo-Leaf/assets/logo.png">
+<meta name="twitter:image" content="https://www.philtrum.io/assets/logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Philtrum",
+  "url": "https://www.philtrum.io/",
+  "logo": "https://www.philtrum.io/assets/logo.png",
+  "description": "Continuous sensing platform linking environmental and physiological signals for timely, actionable alerts."
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&amp;family=Plus+Jakarta+Sans:wght@300;400&amp;family=JetBrains+Mono:wght@300;400&amp;display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&amp;family=Plus+Jakarta+Sans:wght@300;400&amp;family=JetBrains+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="./styles.css">
-<link rel="stylesheet" href="./about.css">
+<link rel="stylesheet" href="./css/styles.css">
+<link rel="stylesheet" href="./css/about.css">
 <link rel="icon" type="image/png" href="./assets/favicon.png">
 <link rel="apple-touch-icon" href="./assets/favicon.png">
 </head>
@@ -33,11 +45,11 @@
 
 <nav class="site-nav" aria-label="Primary">
   <a class="nav-logo" href="./index.html#hero">
-    <img src="./assets/logo.png" alt="Philtrum logo" style="height:36px;width:auto;border-radius:6px;display:block">
-    <span class="nav-sub" style="margin-left:2px">Continuous Sensing</span>
+    <img src="./assets/logo.png" alt="Philtrum logo" class="nav-logo-img">
+    <span class="nav-sub nav-sub-offset">Continuous Sensing</span>
   </a>
   <ul class="nav-links" id="nav-links">
-    <li><a href="./about.html" class="active">About</a></li>
+    <li><a href="./about.html" class="active" aria-current="page">About</a></li>
     <li><a href="./index.html#response">How It Works</a></li>
     <li><a href="./index.html#comfort">Use Cases</a></li>
     <li><a href="./index.html#privacy">Trust</a></li>
@@ -52,9 +64,9 @@
   </div>
 </nav>
 
-<div class="mobile-nav" id="mobile-menu" hidden>
+<div class="mobile-nav" id="mobile-menu" hidden aria-hidden="true" aria-label="Mobile menu">
   <ul class="mobile-links">
-    <li><a href="./about.html" class="active">About</a></li>
+    <li><a href="./about.html" class="active" aria-current="page">About</a></li>
     <li><a href="./index.html#response">How It Works</a></li>
     <li><a href="./index.html#comfort">Use Cases</a></li>
     <li><a href="./index.html#privacy">Trust</a></li>
@@ -69,7 +81,7 @@
       <div class="rev">
         <p class="t-kicker">About Philtrum</p>
         <h1 class="t-dis about-hero-title">Built at the boundary of <em>environment</em> and <em>biology</em>.</h1>
-        <p class="about-hero-lead"><strong>PHILTRUM</strong> is a new kind of company fusing wearable sensing, soft materials, and machine intelligence. We design systems that observe airborne chemistry and skin level biomarkers together, then turn those signals into clear, timely action.</p>
+        <p class="about-hero-lead"><strong>PHILTRUM</strong> is a new kind of company fusing wearable sensing, soft materials, and machine intelligence. We design systems that observe airborne chemistry and skin-level biomarkers together, then turn those signals into clear, timely action.</p>
         <div class="about-actions">
           <a href="#mission" class="btn-sec">Our Mission</a>
         </div>
@@ -103,7 +115,7 @@
       <div class="about-two-col">
         <article class="about-panel rev d1">
           <h3>What We Build</h3>
-          <p>Philtrum builds skin adaptive sensing systems that collect environmental and physiological signals at the same time. This coupling makes cause and effect visible in real contexts such as work, training, and high stress environments.</p>
+          <p>Philtrum builds skin adaptive sensing systems that collect environmental and physiological signals at the same time. This coupling makes cause and effect visible in real contexts such as work, training, and high-stress environments.</p>
           <p>Our goal is not more dashboards. It is better timing, lower noise, and decisions that arrive before risk compounds.</p>
         </article>
         <article class="about-panel rev d2">
@@ -111,7 +123,7 @@
           <ul class="about-list">
             <li>Continuous sensing over snapshot measurements.</li>
             <li>Signal quality and confidence over raw volume.</li>
-            <li>Human centered wearability over laboratory precision.</li>
+            <li>Human-centered wearability over laboratory precision.</li>
             <li>Transparent claims grounded in validation.</li>
           </ul>
         </article>
@@ -141,7 +153,7 @@
         <article class="mission-card rev d3">
           <p class="mission-kicker">Deploy Practically</p>
           <h3>Built for real world wear</h3>
-          <p>Comfort, uptime, and privacy are product requirements, not afterthoughts, for long term use.</p>
+          <p>Comfort, uptime, and privacy are product requirements, not afterthoughts, for long-term use.</p>
         </article>
       </div>
     </div>
@@ -214,7 +226,7 @@
 <footer class="stomata">
   <div>
     <div class="f-brand">
-      <img src="./assets/logo.png" alt="Philtrum" style="height:30px;width:auto;border-radius:4px;display:block;opacity:0.7">
+      <img src="./assets/logo.png" alt="Philtrum" class="footer-logo-img">
     </div>
     <div class="f-copy">© 2026 Philtrum · Continuous Sensing Platform</div>
   </div>
@@ -226,6 +238,6 @@
   </nav>
 </footer>
 
-<script src="./about.js"></script>
+<script src="./js/about.js" defer></script>
 </body>
 </html>

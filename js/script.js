@@ -268,19 +268,58 @@ const navToggle = document.getElementById('nav-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
 if (navToggle && mobileMenu) {
-  const setMenuOpen = (open) => {
+  const menuLinks = Array.from(mobileMenu.querySelectorAll('a[href]'));
+  const menuLabelOpen = 'Open menu';
+  const menuLabelClose = 'Close menu';
+
+  const isMenuOpen = () => navToggle.getAttribute('aria-expanded') === 'true';
+
+  const setMenuOpen = (open, options = {}) => {
+    const { restoreFocus = false, focusFirstLink = false } = options;
     navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? menuLabelClose : menuLabelOpen);
     mobileMenu.hidden = !open;
+    mobileMenu.setAttribute('aria-hidden', String(!open));
     document.body.classList.toggle('nav-open', open);
+
+    if (open && focusFirstLink && menuLinks.length > 0) {
+      menuLinks[0].focus();
+    }
+
+    if (!open && restoreFocus) {
+      navToggle.focus();
+    }
+  };
+
+  const trapFocus = (event) => {
+    if (!isMenuOpen() || event.key !== 'Tab' || menuLinks.length === 0) return;
+    const first = menuLinks[0];
+    const last = menuLinks[menuLinks.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   };
 
   navToggle.addEventListener('click', () => {
-    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-    setMenuOpen(!expanded);
+    setMenuOpen(!isMenuOpen(), { focusFirstLink: true });
   });
 
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!isMenuOpen()) return;
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (!mobileMenu.contains(target) && !navToggle.contains(target)) {
+      setMenuOpen(false);
+    }
   });
 
   window.addEventListener('resize', () => {
@@ -288,8 +327,14 @@ if (navToggle && mobileMenu) {
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setMenuOpen(false);
+    if (e.key === 'Escape' && isMenuOpen()) {
+      e.preventDefault();
+      setMenuOpen(false, { restoreFocus: true });
+    }
   });
+
+  window.addEventListener('keydown', trapFocus);
+  setMenuOpen(false);
 }
 
 /* =====================================================
@@ -438,6 +483,11 @@ if (ctaForm) {
     }
 
     if (submitBtn) {
+      try {
+        window.sessionStorage.setItem('philtrum_access_request_submitted', '1');
+      } catch (err) {
+        // Ignore storage failures; submission still proceeds.
+      }
       submitBtn.disabled = true;
       submitBtn.classList.add('is-loading');
       submitBtn.textContent = 'Submitting...';
@@ -448,12 +498,13 @@ if (ctaForm) {
 }
 
 if (formStatus) {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('submitted') === 'true') {
-    formStatus.hidden = false;
-    if (window.history && window.history.replaceState) {
-      const cleanUrl = `${window.location.pathname}${window.location.hash}`;
-      window.history.replaceState({}, document.title, cleanUrl);
+  try {
+    const submittedFlag = window.sessionStorage.getItem('philtrum_access_request_submitted');
+    if (submittedFlag === '1') {
+      formStatus.hidden = false;
+      window.sessionStorage.removeItem('philtrum_access_request_submitted');
     }
+  } catch (err) {
+    // Ignore storage failures.
   }
 }

@@ -6,17 +6,29 @@
 <title>Philtrum - Continuous Sensing</title>
 <meta name="description" content="Philtrum LEAF is a continuous sensing platform that tracks airborne and skin signals and surfaces alerts when meaningful changes persist.">
 <meta name="theme-color" content="#F1F0EC">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'sha256-kNYz7IobH/3Rg6tx7PHMlOlE7mVLJ9vxujTI1jX7n+Y='; connect-src 'self'; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://tmugi.github.io/fuzzy-octo-Leaf/">
+<link rel="canonical" href="https://www.philtrum.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Philtrum - Continuous Sensing">
-<meta property="og:description" content="Continuous, passive sensing for environmental and body signals with private, on device processing.">
-<meta property="og:url" content="https://tmugi.github.io/fuzzy-octo-Leaf/">
-<meta property="og:image" content="https://tmugi.github.io/fuzzy-octo-Leaf/assets/logo.png">
+<meta property="og:description" content="Continuous, passive sensing for environmental and body signals with private, on-device processing.">
+<meta property="og:url" content="https://www.philtrum.io/">
+<meta property="og:image" content="https://www.philtrum.io/assets/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Philtrum - Continuous Sensing">
-<meta name="twitter:description" content="Continuous, passive sensing for environmental and body signals with private, on device processing.">
-<meta name="twitter:image" content="https://tmugi.github.io/fuzzy-octo-Leaf/assets/logo.png">
+<meta name="twitter:description" content="Continuous, passive sensing for environmental and body signals with private, on-device processing.">
+<meta name="twitter:image" content="https://www.philtrum.io/assets/logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Philtrum",
+  "url": "https://www.philtrum.io/",
+  "logo": "https://www.philtrum.io/assets/logo.png",
+  "description": "Continuous sensing platform linking environmental and physiological signals for timely, actionable alerts."
+}
+</script>
 
 <!-- FIX: Preload display font to eliminate FOUT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +36,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Plus+Jakarta+Sans:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Plus+Jakarta+Sans:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./css/styles.css">
 <link rel="icon" type="image/png" href="./assets/favicon.png">
 <link rel="apple-touch-icon" href="./assets/favicon.png">
 </head>
@@ -36,8 +48,8 @@
    ============================================= -->
 <nav class="site-nav" aria-label="Primary">
   <a class="nav-logo" href="#hero">
-    <img src="./assets/logo.png" alt="Philtrum logo" style="height:36px;width:auto;border-radius:6px;display:block">
-    <span class="nav-sub" style="margin-left:2px">Continuous Sensing</span>
+    <img src="./assets/logo.png" alt="Philtrum logo" class="nav-logo-img">
+    <span class="nav-sub nav-sub-offset">Continuous Sensing</span>
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="./about.html">About</a></li>
@@ -54,7 +66,7 @@
     <span class="scroll-progress-bar" id="scroll-progress-bar"></span>
   </div>
 </nav>
-<div class="mobile-nav" id="mobile-menu" hidden>
+<div class="mobile-nav" id="mobile-menu" hidden aria-hidden="true" aria-label="Mobile menu">
   <ul class="mobile-links">
     <li><a href="./about.html">About</a></li>
     <li><a href="#response" data-section="response">How It Works</a></li>
@@ -72,6 +84,11 @@
 <section id="hero" class="mem">
   <div class="mem-f1"></div>
   <div class="mem-f2"></div>
+  <div class="hero-drift" aria-hidden="true">
+    <span class="hero-drift-layer hd-l1"></span>
+    <span class="hero-drift-layer hd-l2"></span>
+    <span class="hero-drift-layer hd-l3"></span>
+  </div>
 
   <!-- Corner membrane illustration -->
   <div class="hero-membrane" id="hm">
@@ -82,7 +99,7 @@
     <div class="hm-ring hm-r2"></div>
     <div class="hm-ring hm-r3"></div>
     <div class="hm-core"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 440 440">
+    <svg class="hero-membrane-svg" viewBox="0 0 440 440">
       <path class="vp" d="M220 90 L220 350"/>
       <path class="vb" d="M220 175 Q188 190 164 178 Q142 166 126 150"/>
       <path class="vb" d="M220 175 Q252 190 276 178 Q298 166 314 150"/>
@@ -99,7 +116,7 @@
     <!-- FIX: outcome-led copy, not mechanism-led -->
     <h1 class="t-dis">Background sensing. Actionable alerts.</h1>
   </div>
-  <p class="hero-sub rev d1">A skin adaptive wearable that captures environmental and physiological signals, translates them into actionable alerts, then responds with timely cues.</p>
+  <p class="hero-sub rev d1">A skin adaptive wearable that captures environmental and physiological signals, translates them into actionable alerts, then responds in real time.</p>
 
   <div class="hero-signal-strip rev d2" aria-hidden="true">
     <span></span><span></span><span></span>
@@ -371,7 +388,7 @@
   <div class="chips">
     <span class="chip-label">Controlled lab validation program across multiple chemical signal classes</span>
   </div>
-  <div class="chips" style="margin-top:14px">
+  <div class="chips chips-spaced">
     <span class="chip">Sample Data Package</span>
     <span class="chip">Pilot Protocol Draft</span>
     <span class="chip">Integration Checklist</span>
@@ -388,7 +405,7 @@
 <section id="privacy">
   <div class="diff-hed">
     <p class="t-kicker">Why This Approach</p>
-    <p style="font-size:14px;color:var(--text-3);font-weight:300;margin-top:10px;max-width:560px;line-height:1.65">Signal processing runs on device by default. Data sync is user initiated. Identifiable data sharing is opt in. Current positioning is general wellness and environmental awareness, not diagnostic use.</p>
+    <p class="privacy-explainer">Signal processing runs on device by default. Data sync is user initiated. Identifiable data sharing is opt in. Current positioning is general wellness and environmental awareness, not diagnostic use.</p>
   </div>
   <div class="diff-chips">
     <span class="d-chip">Continuous</span>
@@ -406,9 +423,9 @@
 <section id="cta" class="mem">
   <div class="mem-f1"></div>
   <div class="mem-f2"></div>
-  <div class="cta-inner" style="position:relative;z-index:1">
+  <div class="cta-inner">
     <div class="cta-block rev">
-      <p class="t-kicker" style="margin-bottom:14px">Access Requests</p>
+      <p class="t-kicker cta-kicker">Access Requests</p>
       <h2 class="t-dis cta-hed">Request pilot or<br><em>brief access.</em></h2>
       <p class="cta-sub">Tell us your use case and team context. We review each request and share access selectively for pilot, technical brief, and investor brief materials.</p>
       <div class="trust-strip" aria-label="Pilot confidence markers">
@@ -419,9 +436,9 @@
       </div>
       <form id="cta-form" class="cta-form" action="https://formsubmit.co/info@philtrum.io" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Philtrum Access Request Submission">
-        <input type="hidden" name="_next" value="https://tmugi.github.io/fuzzy-octo-Leaf/?submitted=true#cta">
+        <input type="hidden" name="_next" value="https://www.philtrum.io/#cta">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_captcha" value="true">
         <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off">
 
         <div class="form-stepper" aria-hidden="true">
@@ -434,18 +451,18 @@
           <div class="cta-form-grid">
             <label class="form-field" for="ea-name">
               <span>Full Name</span>
-              <input id="ea-name" name="full_name" type="text" autocomplete="name" required>
+              <input id="ea-name" name="full_name" type="text" autocomplete="name" maxlength="100" required>
               <span class="field-error" id="ea-name-error" hidden>Please enter your full name.</span>
             </label>
 
             <label class="form-field" for="ea-email">
               <span>Work Email</span>
-              <input id="ea-email" name="work_email" type="email" autocomplete="email" required>
+              <input id="ea-email" name="work_email" type="email" autocomplete="email" maxlength="120" required>
               <span class="field-error" id="ea-email-error" hidden>Please enter a valid work email.</span>
             </label>
           </div>
 
-          <p class="form-inline-error" id="form-inline-error" hidden>Please fix the highlighted fields before continuing.</p>
+          <p class="form-inline-error" id="form-inline-error" role="alert" aria-live="assertive" hidden>Please fix the highlighted fields before continuing.</p>
 
           <div class="cta-form-actions">
             <button type="button" class="btn-pri" id="form-next">Continue</button>
@@ -468,13 +485,13 @@
 
             <label class="form-field form-field-full" for="ea-org">
               <span>Organization</span>
-              <input id="ea-org" name="organization" type="text" autocomplete="organization" required>
+              <input id="ea-org" name="organization" type="text" autocomplete="organization" maxlength="120" required>
               <span class="field-error" id="ea-org-error" hidden>Please enter your organization.</span>
             </label>
 
             <label class="form-field form-field-full" for="ea-notes">
               <span>Notes (Optional)</span>
-              <textarea id="ea-notes" name="notes" rows="3" placeholder="Pilot goals, use case, or timeline"></textarea>
+              <textarea id="ea-notes" name="notes" rows="3" maxlength="600" placeholder="Pilot goals, use case, or timeline"></textarea>
             </label>
           </div>
 
@@ -486,7 +503,7 @@
           </div>
         </div>
       </form>
-      <p class="form-status" id="form-status" hidden>Thanks, your submission was received. We will follow up soon.</p>
+      <p class="form-status" id="form-status" role="status" aria-live="polite" hidden>Thanks, your submission was received. We will follow up soon.</p>
     </div>
 
   </div>
@@ -498,7 +515,7 @@
 <footer class="stomata">
   <div>
     <div class="f-brand">
-      <img src="./assets/logo.png" alt="Philtrum" style="height:30px;width:auto;border-radius:4px;display:block;opacity:0.7">
+      <img src="./assets/logo.png" alt="Philtrum" class="footer-logo-img">
     </div>
     <div class="f-copy">© 2026 Philtrum · Continuous Sensing Platform</div>
   </div>
@@ -512,6 +529,6 @@
 </footer>
 
 
-<script src="./script.js"></script>
+<script src="./js/script.js" defer></script>
 </body>
 </html>

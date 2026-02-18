@@ -11,12 +11,16 @@
 .about-hero {
   padding: clamp(84px, 9vw, 108px) 0 clamp(60px, 7vw, 80px);
   border-bottom: 1px solid var(--stroke-s);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(201,120,80,0.1), transparent 44%),
+    radial-gradient(circle at 18% 86%, rgba(25,102,102,0.07), transparent 46%),
+    linear-gradient(180deg, #f4f2ed 0%, var(--base) 72%);
 }
 
 .about-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
-  gap: 24px;
+  gap: 28px;
   align-items: end;
 }
 
@@ -63,9 +67,9 @@
 
 .about-local-nav a:hover,
 .about-local-nav a.active {
-  color: var(--chloro);
-  border-color: var(--stroke-c);
-  background: rgba(38, 107, 67, 0.06);
+  color: var(--amber);
+  border-color: var(--amber-s);
+  background: var(--amber-w);
 }
 
 .about-hero-card {
@@ -86,7 +90,7 @@
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--chloro);
+  color: var(--amber);
   margin-bottom: 16px;
 }
 
@@ -125,6 +129,22 @@
 .about-section {
   padding: clamp(58px, 7vw, 80px) 0;
 }
+#who {
+  background:
+    linear-gradient(180deg, rgba(201,120,80,0.065) 0%, rgba(201,120,80,0.018) 28%, var(--base) 82%);
+}
+#mission {
+  background:
+    linear-gradient(180deg, rgba(25,102,102,0.075) 0%, rgba(25,102,102,0.02) 28%, var(--base-2) 82%);
+}
+#principles {
+  background:
+    linear-gradient(180deg, rgba(201,120,80,0.06) 0%, rgba(201,120,80,0.018) 26%, var(--base) 82%);
+}
+#roadmap {
+  background:
+    linear-gradient(180deg, rgba(25,102,102,0.07) 0%, rgba(25,102,102,0.02) 26%, var(--base-2) 82%);
+}
 
 .about-section-alt {
   background: var(--base-2);
@@ -134,7 +154,7 @@
 
 .about-section-header {
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 34px;
 }
 
 .about-section-title {
@@ -143,7 +163,7 @@
 
 .about-section-intro {
   font-size: clamp(16px, 1.2vw, 18px);
-  line-height: 1.75;
+  line-height: 1.78;
   color: var(--text-2);
   max-width: 72ch;
 }
@@ -151,14 +171,14 @@
 .about-two-col {
   display: grid;
   grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
-  gap: 18px;
+  gap: 20px;
 }
 
 .about-panel {
   background: var(--base-2);
   border: 1px solid var(--stroke-s);
   border-radius: var(--r-leaf);
-  padding: 32px 28px 30px;
+  padding: 34px 30px 32px;
 }
 
 .about-panel h3 {
@@ -170,9 +190,9 @@
 
 .about-panel p {
   font-size: 15.5px;
-  line-height: 1.72;
+  line-height: 1.74;
   color: var(--text-2);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .about-panel p:last-child {
@@ -182,14 +202,14 @@
 .about-list {
   list-style: none;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .about-list li {
   position: relative;
   padding-left: 18px;
   font-size: 15.5px;
-  line-height: 1.68;
+  line-height: 1.7;
   color: var(--text-2);
 }
 
@@ -207,7 +227,7 @@
 .mission-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.84fr);
-  gap: 14px;
+  gap: 16px;
 }
 
 .mission-card {
@@ -234,7 +254,7 @@
   font-size: 9px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--chloro);
+  color: var(--amber);
   margin-bottom: 10px;
 }
 
@@ -254,14 +274,14 @@
 
 .mission-card p {
   font-size: 15.5px;
-  line-height: 1.68;
+  line-height: 1.7;
   color: var(--text-2);
 }
 
 .principles-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .principle-card:nth-child(1),
@@ -291,13 +311,13 @@
 
 .principle-card p {
   font-size: 15.5px;
-  line-height: 1.68;
+  line-height: 1.7;
   color: var(--text-2);
 }
 
 .roadmap-list {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .roadmap-item {
@@ -376,7 +396,7 @@
 
 .roadmap-item p {
   font-size: 15.5px;
-  line-height: 1.68;
+  line-height: 1.7;
   color: var(--text-2);
 }
 
